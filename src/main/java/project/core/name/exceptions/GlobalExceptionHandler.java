@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
 
     @Setter
     @Getter
-    class ErrorResponse {
+    private class ErrorResponse {
 
         private String errorCode;
         private String errorMessage;

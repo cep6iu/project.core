@@ -26,9 +26,5 @@ public class UserValidator implements Validator {
             errors.rejectValue("login", "login.exists", "This login is already used");
         }
 
-        if (user.getLogin().length() < 8) {
-            errors.rejectValue("login" , "login.length", "This login is too short");
-        }
-
      }
 }

@@ -34,7 +34,9 @@ public class UserService {
                         .build())
                 .build();
 
-      userRepository.save(user);
+        user.getPersonalData().setUser(user);
+
+        userRepository.save(user);
 
     }
 
