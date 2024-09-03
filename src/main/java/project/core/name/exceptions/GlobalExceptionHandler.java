@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,9 +23,17 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseBody
+    public ResponseEntity<ErrorResponse> handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
+
+        ErrorResponse errorResponse = new ErrorResponse("BAD_REQUEST",  "Invalid role. Allowed values are: " + stringFix(e.getMessage()));
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(RegistrationException.class)
     @ResponseBody
-    public ResponseEntity<ErrorResponse> handleRegistrationException2(RegistrationException e) {
+    public ResponseEntity<ErrorResponse> handleRegistrationException(RegistrationException e) {
 
         ErrorResponse errorResponse = new ErrorResponse("BAD_REQUEST", stringFix(e.getMessage()));
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
@@ -33,7 +42,7 @@ public class GlobalExceptionHandler {
 
     @Setter
     @Getter
-    class ErrorResponse {
+    private class ErrorResponse {
 
         private String errorCode;
         private String errorMessage;
@@ -45,6 +54,6 @@ public class GlobalExceptionHandler {
     }
 
     private static String stringFix(String message) {
-        return message.replaceAll( ".*" + ": ", "");
+        return message.replaceAll(".*" + ": ", "");
     }
 }

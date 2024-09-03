@@ -23,9 +23,6 @@
                     <constraints nullable="false"/>
                 </column>
                 <column name="role" type="varchar(32)"/>
-                <column name="personal_data_id" type="int">
-                    <constraints unique="true" nullable="true"/>
-                </column>
             </createTable>
         </changeSet>
 
@@ -37,8 +34,8 @@
             </preConditions>
 
             <createTable tableName="personal_data">
-                <column name="id" type="int" autoIncrement="true">
-                    <constraints primaryKey="true" nullable="false"/>
+                <column name="user_id" type="bigint">
+                    <constraints unique="true" primaryKey="true" nullable="false"/>
                 </column>
                 <column name="name" type="varchar(32)"/>
                 <column name="surname" type="varchar(32)"/>
@@ -48,9 +45,9 @@
         </changeSet>
 
         <changeSet id="foreign_key_user_personal_data_01" author="serghei">
-            <addForeignKeyConstraint baseTableName="users"
-                                     baseColumnNames="personal_data_id"
-                                     referencedTableName="personal_data"
+            <addForeignKeyConstraint baseTableName="personal_data"
+                                     baseColumnNames="user_id"
+                                     referencedTableName="users"
                                      referencedColumnNames="id"
                                      constraintName="fk_user_personal_data"
                                      onDelete="CASCADE"

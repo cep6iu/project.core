@@ -18,8 +18,9 @@ public class PersonalData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", unique = true)
+    private User user;
     private String name;
     private String surname;
     private Character gender;
