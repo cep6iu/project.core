@@ -1,4 +1,4 @@
-package project.core.name.repositories.identification;
+package project.core.name.repositories.profile;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

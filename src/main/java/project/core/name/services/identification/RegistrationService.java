@@ -8,13 +8,13 @@ import project.core.name.dto.identification.UserDTO;
 import project.core.name.entities.identification.PersonalData;
 import project.core.name.entities.identification.User;
 import project.core.name.enums.indentification.UserRole;
-import project.core.name.repositories.identification.UserRepository;
+import project.core.name.repositories.profile.UserRepository;
 
 import java.util.Base64;
 
 @Service
 @Data
-public class UserService {
+public class RegistrationService {
 
     @Autowired
     private UserRepository userRepository;
@@ -31,6 +31,8 @@ public class UserService {
                         .surname(userDTO.getPersonalData().getSurname())
                         .gender(userDTO.getPersonalData().getGender())
                         .dateOfBirth(userDTO.getPersonalData().getDateOfBirth())
+                        .email(userDTO.getPersonalData().getEmail())
+                        .phoneNumber(userDTO.getPersonalData().getPhoneNumber())
                         .build())
                 .build();
 

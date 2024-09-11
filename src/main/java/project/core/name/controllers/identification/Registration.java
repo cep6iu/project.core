@@ -11,8 +11,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import project.core.name.dto.identification.UserDTO;
 import project.core.name.exceptions.indentification.RegistrationException;
-import project.core.name.services.identification.UserService;
-import project.core.name.utils.identification.UserValidator;
+import project.core.name.services.identification.RegistrationService;
+import project.core.name.utils.profile.UserValidator;
 
 @Validated
 @RestController
@@ -23,10 +23,10 @@ public class Registration {
     private UserValidator userValidator;
 
     @Autowired
-    private UserService userService;
+    private RegistrationService registrationService;
 
-    @Qualifier("validator")
     @Autowired
+    @Qualifier("userValidator")
     private Validator validator;
 
     @InitBinder
@@ -42,7 +42,7 @@ public class Registration {
         if (result.hasErrors()) {
             throw new RegistrationException(result.getFieldError().getDefaultMessage());
         } else {
-           userService.saveUser(user);
+           registrationService.saveUser(user);
            return ResponseEntity.ok("user saved successfully");
         }
     }
@@ -55,7 +55,7 @@ public class Registration {
         if (result.hasErrors()) {
             throw new RegistrationException(result.getFieldError().getDefaultMessage());
         } else {
-            userService.saveUser(user);
+            registrationService.saveUser(user);
             return ResponseEntity.ok("user saved successfully");
         }
     }

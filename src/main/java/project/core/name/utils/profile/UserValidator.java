@@ -1,4 +1,4 @@
-package project.core.name.utils.identification;
+package project.core.name.utils.profile;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -6,7 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import project.core.name.dto.identification.UserDTO;
 import project.core.name.enums.indentification.UserRole;
-import project.core.name.repositories.identification.UserRepository;
+import project.core.name.repositories.profile.UserRepository;
 
 import java.util.List;
 
